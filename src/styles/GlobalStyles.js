@@ -33,7 +33,25 @@ export const GlobalStyles = createGlobalStyle`
   button { 
     background: transparent;
     border: 0; 
-    outline: 0 
+    outline: 0;
+    padding: 10px 15px;
+    background-color: #fbb03b;
+    border-radius: 5px;
+    font-size: 1.2em;
+    color: white;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    cursor: pointer;
+    box-shadow: 0 5px #999;
+
+    &:hover {
+      background-color: #ff584f;
+    }
+
+    &:active {
+      box-shadow: 0 2px #666;
+      transform: translateY(4px);
+    }
   }
 
   body {

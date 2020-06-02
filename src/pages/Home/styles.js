@@ -5,7 +5,7 @@ import background from '../../assets/images/background1.jpg'
 export const Top = styled.div`
   min-height: 100vh;
   background-image: url(${background});
-  background-size: cover;
+  background-position: 100% 0%;
   background-repeat: no-repeat;
 `
 
@@ -20,9 +20,9 @@ export const Search = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 50vh;
 
-  div {
+  form {
     width: 65%;
 
     p {
@@ -30,6 +30,12 @@ export const Search = styled.div`
       margin-bottom: 3%;
       font-size: 1.8em;
       font-weight: 700;
+    }
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center
     }
   }
 `
