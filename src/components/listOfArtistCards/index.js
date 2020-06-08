@@ -9,7 +9,7 @@ export const ListOfArtistCards = ({ query }) => {
 
   useEffect (() => {
     searchArtist(query, setArtists)
-  }, [])
+  }, [query])
 
   return (
     <Grid>

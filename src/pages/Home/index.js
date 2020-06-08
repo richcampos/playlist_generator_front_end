@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-fragments */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Logo, Search, Top } from './styles'
 import logo from '../../assets/images/logo.svg'
 import { setTokenInStorage } from '../../services/getAPIToken'
@@ -7,19 +7,19 @@ import { ListOfArtistCards } from '../../components/listOfArtistCards'
 
 export const Home = () => {
   const [query, setQuery] = useState('')
-  const [search, setSearch] = useState(false)
+  let inputValue = ''
 
   if(!localStorage.getItem('token')){
     setTokenInStorage()
   }
 
   function changeHandler (e) {
-    setQuery(e.target.value)
+    inputValue = e.target.value
   }
   
   function clickHandler (e) {
     e.preventDefault()
-    setSearch(true)
+    setQuery(inputValue)
   }
 
   return (
@@ -36,11 +36,7 @@ export const Home = () => {
           </div>
         </form>
       </Search>
-      { 
-        search
-          ? <ListOfArtistCards  query={query} />
-          : <div></div>
-      }
+      <ListOfArtistCards  query={query} />
     </Top>
   )
 }
