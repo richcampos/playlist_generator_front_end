@@ -7,7 +7,7 @@ import DEFAULT_ALBUM from '../../assets/images/default_album.jpg'
 export const ListOfArtistCards = ({ query }) => {
   const [artists, setArtists] = useState([])
 
-  useEffect (() => {
+  useEffect(() => {
     searchArtist(query, setArtists)
   }, [query])
 
