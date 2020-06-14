@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Link as LinkRouter } from '@reach/router'
+import { Link as LinkRouter } from 'react-router-dom'
 import background from '../../assets/images/background1.jpg'
 
 export const Logo = styled(LinkRouter)`
