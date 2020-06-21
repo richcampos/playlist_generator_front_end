@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
+  .warning {
+    font-size: 0.9em;
+    color: #94244a;
+    font-style: italic;
+  }
+
   html {
     box-sizing: border-box;
     font-family: 'Work Sans'
