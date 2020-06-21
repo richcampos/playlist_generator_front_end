@@ -1,25 +1,37 @@
+/* eslint-disable quote-props */
 import React, { useState } from 'react'
 import { Header } from '../../components/Header'
 import { Container, Bottom } from './styles'
-import { searchArtist } from '../../services/searchArtist'
 import { RecommendedPlaylist } from '../../components/RecommendedPlaylist'
 
 export const Dashboard = () => {
-  const [queryArtist, setQueryArtist] = useState({})
-  const [invalidForm, setInvalidForm] = useState(false)
-  let inputValue = ''
+  const [query, setQuery] = useState('')
+  const [artist, setArtist] = useState({})
+  const [invalidForm, setInvalidForm] = useState(true)
+  const token = window.localStorage.getItem('access_token')
 
   function changeHandler (event) {
-    inputValue = event.target.value
+    setQuery(event.target.value)
   }
 
-  function clickHandler (event) {
+  function submitHandler (event) {
     event.preventDefault()
 
-    if (inputValue === '') setInvalidForm(true)
-    else {
-      setInvalidForm(false)
-      searchArtist(inputValue, setQueryArtist)
+    if (query !== '') {
+      const url = `https://api.spotify.com/v1/search?q=${query}&type=artist`
+      window.fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          setArtist(data.artists.items[0])
+          setInvalidForm(false)
+        })
+    } else {
+      setInvalidForm(true)
     }
   }
 
@@ -28,18 +40,22 @@ export const Dashboard = () => {
       <Header />
       <Container>
         <p>Serch for an artist and we will make a playlist for you</p>
-        <form>
+        <form onSubmit={submitHandler}>
           {
             invalidForm
               ? <label className='warning'><sup>*</sup>Write an artist</label>
               : <label />
           }
           <input onChange={changeHandler} placeholder='The Weekend, Muse, Metallica' />
-          <button onClick={clickHandler}>Make playlist</button>
+          <button type='submit'>Make playlist</button>
         </form>
       </Container>
       <Bottom>
-        <RecommendedPlaylist id={queryArtist.id} name={queryArtist.name} />
+        {
+          invalidForm
+            ? <div />
+            : <RecommendedPlaylist artist={artist} />
+        }
       </Bottom>
     </div>
   )

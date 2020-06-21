@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { ArtistSong } from '../ArtistSong'
 import { PlaylistTitle, Grid } from './styles'
 
-export const RecommendedPlaylist = ({ id, name }) => {
+export const RecommendedPlaylist = ({ artist: { name, id } }) => {
   const token = window.localStorage.getItem('access_token')
-  const [songs, setSongs] = useState([])
+  const [artists, setArtists] = useState([])
 
   useEffect(() => {
     const relatedURL = `https://api.spotify.com/v1/artists/${id}/related-artists`
-    const country = window.localStorage.getItem('country')
-    const playlistSongs = []
 
     window.fetch(relatedURL, {
       headers: {
@@ -19,29 +17,7 @@ export const RecommendedPlaylist = ({ id, name }) => {
     })
       .then(response => response.json())
       .then(data => {
-        const artists = data.artists.map(artist => {
-          const id = artist.id
-
-          return id
-        })
-
-        artists.forEach(id => {
-          const url = `https://api.spotify.com/v1/artists/${id}/top-tracks?country=${country}`
-
-          window.fetch(url, {
-            headers: {
-              // eslint-disable-next-line quote-props
-              'Authorization': `Bearer ${token}`
-            }
-          })
-            .then(response => response.json())
-            .then(data => {
-              const randomTrack = Math.floor(Math.random() * 10)
-              playlistSongs.push(data.tracks[randomTrack])
-              console.log(playlistSongs)
-              setSongs(playlistSongs)
-            })
-        })
+        setArtists(data.artists)
       })
   }, [id])
 
@@ -54,9 +30,9 @@ export const RecommendedPlaylist = ({ id, name }) => {
       }
       <Grid>
         {
-          songs.map(song => {
+          artists.map(artist => {
             return (
-              <ArtistSong key={song.id} song={song} />
+              <ArtistSong key={artist.id} id={artist.id} />
             )
           })
         }
