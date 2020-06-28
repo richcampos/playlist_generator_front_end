@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Container, Title, Subtitle } from './styles'
+import { Context } from '../../Context'
 
 export const ArtistSong = ({ id }) => {
   const [song, setSong] = useState({})
+  const { updateSongs } = useContext(Context)
 
   useEffect(() => {
     const token = window.localStorage.getItem('access_token')
@@ -20,6 +22,7 @@ export const ArtistSong = ({ id }) => {
         const randomNumber = Math.floor(Math.random() * 10)
         const song = data.tracks[randomNumber]
         setSong(song)
+        updateSongs(song)
       })
   }, [id])
 

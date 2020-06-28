@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable quote-props */
 import React, { useState } from 'react'
 import { Header } from '../../components/Header'
 import { Container, Bottom } from './styles'
 import { RecommendedPlaylist } from '../../components/RecommendedPlaylist'
+
+import { Context } from '../../Context'
 
 export const Dashboard = () => {
   const [query, setQuery] = useState('')
@@ -54,7 +57,55 @@ export const Dashboard = () => {
         {
           invalidForm
             ? <div />
-            : <RecommendedPlaylist artist={artist} />
+            : <Context.Consumer>
+              {
+                ({ songs }) => {
+                  function clickHandler () {
+                    const userId = window.localStorage.getItem('user_id')
+                    const url = `https://api.spotify.com/v1/users/${userId}/playlists`
+                    const data = { 'name': 'Bargi Playlist' }
+
+                    window.fetch(url, {
+                      method: 'POST',
+                      headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(data)
+                    })
+                      .then(response => response.json())
+                      .then(data => {
+                        const playlistId = data.id
+                        const playlistUrl = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`
+                        const uris = songs.map(song => {
+                          return song.uri
+                        })
+                        const bodyData = { 'uris': uris }
+
+                        window.fetch(playlistUrl, {
+                          method: 'POST',
+                          headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify(bodyData)
+                        })
+                          .then(response => response.json())
+                          .then(data => {
+                            console.log('success')
+                          })
+                      })
+                  }
+
+                  return (
+                    <div>
+                      <RecommendedPlaylist artist={artist} />
+                      <button onClick={clickHandler}>Agregar playlist</button>
+                    </div>
+                  )
+                }
+              }
+            </Context.Consumer>
         }
       </Bottom>
     </div>

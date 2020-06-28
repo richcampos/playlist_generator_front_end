@@ -10,6 +10,7 @@ export const Header = () => {
   }, [])
 
   window.localStorage.setItem('country', userData.country)
+  window.localStorage.setItem('user_id', userData.id)
 
   return (
     <Top>
