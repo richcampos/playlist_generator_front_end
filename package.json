@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "copy-webpack-plugin": "^6.0.2",
     "intersection-observer": "^0.7.0",
     "prop-types": "^15.7.2",
     "random-hash": "^4.0.1",
