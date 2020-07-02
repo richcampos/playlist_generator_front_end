@@ -47,7 +47,7 @@ export const Dashboard = () => {
       <Header />
       {
         success
-          ? <Success>Enjoy your playlist in Spotify</Success>
+          ? <Success>Enjoy your playlist in <a href='https://open.spotify.com' target='_blank' rel='noopener noreferrer'>Spotify</a></Success>
           : <p />
       }
       <Container>
