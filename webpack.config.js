@@ -37,6 +37,16 @@ module.exports = {
             outputPath: 'images'
           }
         }]
+      },
+      {
+        test: /\.ico/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images'
+          }
+        }]
       }
     ]
   }

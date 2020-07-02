@@ -15,7 +15,7 @@ const levitate = keyframes`
 `
 
 export const Container = styled.div`
-  background-color: #fbb03b;
+  background-color: #ff584f;
   border-radius: 5px;
   padding: 1%;
   display: inline;
@@ -24,8 +24,12 @@ export const Container = styled.div`
   animation: ${levitate} 3s alternate infinite ease-in-out;
 
   &:hover {
-    background-color: #ff584f;
+    opacity: 0.3;
     animation: none;
+  }
+
+  &.remove {
+    display: none;
   }
 `
 

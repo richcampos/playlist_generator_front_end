@@ -10,6 +10,17 @@ const Provider = ({ children }) => {
     updateSongs: value => {
       setSongs(oldSongs => [...oldSongs, value])
     },
+    deleteSong: value => {
+      setSongs(oldSongs => {
+        oldSongs.splice(value, 1)
+        console.log(oldSongs)
+        return [...oldSongs]
+      })
+
+      // songs.forEach(song => {
+      //   console.log(song.name)
+      // })
+    },
     clearSongs: value => {
       setSongs([])
     }

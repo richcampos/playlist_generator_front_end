@@ -1,3 +1,4 @@
+import './assets/images/favicon.ico'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Context from './Context'

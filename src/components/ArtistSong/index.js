@@ -4,7 +4,7 @@ import { Context } from '../../Context'
 
 export const ArtistSong = ({ id }) => {
   const [song, setSong] = useState({})
-  const { updateSongs } = useContext(Context)
+  const { songs, updateSongs, deleteSong } = useContext(Context)
 
   useEffect(() => {
     const token = window.localStorage.getItem('access_token')
@@ -25,6 +25,18 @@ export const ArtistSong = ({ id }) => {
         updateSongs(song)
       })
   }, [id])
+
+  function deleteOne (e) {
+    const uri = song.uri
+    const element = e.target
+
+    songs.forEach((stateSong, index) => {
+      if (stateSong.uri === uri) {
+        deleteSong(index)
+        element.classList.add('remove')
+      }
+    })
+  }
 
   return (
     <Container>
