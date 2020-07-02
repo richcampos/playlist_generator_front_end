@@ -16,8 +16,12 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: inherit;
   }
 
-  ul, li, h1, h2, h3, p, button { 
+  ul, li, h1, h2, h3, button { 
     margin: 0; padding: 0; 
+  }
+
+  p {
+    margin-bottom: 10px;
   }
 
   ul { 
@@ -30,9 +34,18 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.2em;
     width: 100%;
 
+    @media (max-width: 960px) {
+      padding: 7px;
+      font-size: 1em;
+    }
+
     ::placeholder {
       color: rgba(32, 20, 58, 0.4);
       font-style: italic;
+
+      @media (max-width: 960px) {
+        font-size: 1em;
+      }
     }
   }
 

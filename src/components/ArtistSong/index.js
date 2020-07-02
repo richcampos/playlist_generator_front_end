@@ -4,6 +4,7 @@ import { Context } from '../../Context'
 
 export const ArtistSong = ({ id }) => {
   const [song, setSong] = useState({})
+  const [deleted, setDeleted] = useState(false)
   const { songs, updateSongs, deleteSong } = useContext(Context)
 
   useEffect(() => {
@@ -26,20 +27,19 @@ export const ArtistSong = ({ id }) => {
       })
   }, [id])
 
-  function deleteOne (e) {
+  function deleteOne () {
     const uri = song.uri
-    const element = e.target
+    setDeleted(true)
 
     songs.forEach((stateSong, index) => {
       if (stateSong.uri === uri) {
         deleteSong(index)
-        element.classList.add('remove')
       }
     })
   }
 
   return (
-    <Container>
+    <Container onClick={deleteOne} deleted={deleted}>
       <Title>{song.name}</Title>
       <br />
       <Subtitle>

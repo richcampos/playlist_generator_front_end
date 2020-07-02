@@ -13,16 +13,14 @@ const Provider = ({ children }) => {
     deleteSong: value => {
       setSongs(oldSongs => {
         oldSongs.splice(value, 1)
-        console.log(oldSongs)
         return [...oldSongs]
       })
-
-      // songs.forEach(song => {
-      //   console.log(song.name)
-      // })
     },
     clearSongs: value => {
-      setSongs([])
+      setSongs(oldSongs => {
+        oldSongs.splice(0)
+        return [...oldSongs]
+      })
     }
   }
 

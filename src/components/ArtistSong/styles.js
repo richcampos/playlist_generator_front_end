@@ -22,14 +22,13 @@ export const Container = styled.div`
   margin: 1%;
   cursor: pointer;
   animation: ${levitate} 3s alternate infinite ease-in-out;
+  ${({ deleted }) => deleted && `
+    display: none;
+  `}
 
   &:hover {
     opacity: 0.3;
     animation: none;
-  }
-
-  &.remove {
-    display: none;
   }
 `
 

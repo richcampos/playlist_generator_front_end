@@ -20,4 +20,9 @@ export const Background = styled.div`
   background-repeat: no-repeat;
   position: fixed;
   z-index: -1;
+  
+  @media (max-width: 960px) {
+    hieght: 70vh;
+    width: 100%;
+  }
 `
